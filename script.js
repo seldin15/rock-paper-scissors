@@ -1,3 +1,4 @@
+//Function that returns random computer pick for RPS
 function computerPlay() {
     let rockPaperScissors = ['Rock', 'Paper', 'Scissors'];
     
@@ -5,3 +6,11 @@ function computerPlay() {
 
     return result;
 }
+
+function playerSelection() {
+    const playerInput = prompt("Choose your weapon! (Either Rock, Paper or Scissors)", "");
+    const sanitizedInput = playerInput.toLowerCase();
+
+    return sanitizedInput;
+}
+console.log(playerSelection());
