@@ -1,7 +1,4 @@
-const playerSelection = playerInput();
-const computerSelection = computerPlay();
-
-let roundsPlayed = 0;
+let roundsPlayed = 1;
 let playerScore = 0;
 let computerScore = 0;
 
@@ -22,6 +19,8 @@ function playerInput() {
 
 function playRound(playerInput, computerPlay) {
     //Player or computer wins if any of the combination is true: player: rock ; computer: paper --> computer wins (paper beats rock etc.)!
+    playerInput = playerInput();
+    computerPlay = computerPlay();
      if(playerInput === computerPlay) {
         playerScore++;
         computerScore++;
@@ -33,24 +32,35 @@ function playRound(playerInput, computerPlay) {
         playerInput === "paper" && computerPlay === "rock" ||
         playerInput === "scissors" && computerPlay === "paper")) {
             playerScore++;
-            return "Player wins!";
+            return `Player wins! ${playerInput} beats ${computerPlay}`;
         }
     else if ((computerPlay === "rock" && playerInput === "scissors" ||
               computerPlay === "paper" && playerInput === "rock" ||
               computerPlay === "scissors" && playerInput === "paper")) {
                 computerScore++;
-                return "Computer wins!";
+                return `Computer wins! ${computerPlay} beats ${playerInput}`;
               }            
+}
+function getWinner() {
+    if(playerScore === computerScore) {
+        console.log("Tie!");
+    }
+   else if(playerScore > computerScore) {
+        console.log("Player wins the round!");
+    }
+    else {
+        console.log("Computer wins the round!");
+    }
 }
 //Problematic function
 function game() {
-    while(roundsPlayed < 5) { //roundsplayed = 0, 0 < 5 --> TRUE 
-        let announceWinner = playRound(playerSelection, computerSelection);
+    while(roundsPlayed <= 5) { //roundsplayed = 0, 0 < 5 --> TRUE 
+        console.log("Player score: " + playerScore + " : " + "computer score: " + computerScore);
+        console.log("Round number "+roundsPlayed + ": " +playRound(playerInput, computerPlay));
         roundsPlayed++;
-        return announceWinner;
     }
+    return getWinner();
 }
-console.log("You played: " + playerSelection + " and computer played: "+ computerSelection);
-console.log(game());
 
+game();
 
