@@ -50,6 +50,7 @@ function game() {
         return announceWinner;
     }
 }
+console.log("You played: " + playerSelection + " and computer played: "+ computerSelection);
 console.log(game());
 
 
