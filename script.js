@@ -1,3 +1,7 @@
+const rock = document.querySelector('#rock');
+const paper = document.querySelector('#paper');
+const scissors = document.querySelector('#scissors');
+
 let roundsPlayed = 1;
 let playerScore = 0;
 let computerScore = 0;
@@ -10,16 +14,30 @@ function computerPlay() {
 
     return result;
 }
+//Buttons!
+rock.addEventListener('click', playRound);
+paper.addEventListener('click', playRound);
+scissors.addEventListener('click', playRound);
 
-function playerInput() {
-    let input = prompt("Choose your weapon! (Either Rock, Paper or Scissors)", "");
-    return input.toLowerCase();
+function playerInput(rock, paper, scissors) {
+    if(rock) {
+        console.log("rock");
+    }
+    if(paper) {
+        console.log("paper");
+    }
+    if(scissors) {
+        console.log("scissors");
+    }
 }
+
+
+
 
 
 function playRound(playerInput, computerPlay) {
     //Player or computer wins if any of the combination is true: player: rock ; computer: paper --> computer wins (paper beats rock etc.)!
-    playerInput = playerInput();
+    playerInput = playerInput(rock, paper, scissors);
     computerPlay = computerPlay();
      if(playerInput === computerPlay) {
         playerScore++;
@@ -28,15 +46,15 @@ function playRound(playerInput, computerPlay) {
     }
     else if(
         (
-        playerInput === "rock" && computerPlay === "scissors" || 
-        playerInput === "paper" && computerPlay === "rock" ||
-        playerInput === "scissors" && computerPlay === "paper")) {
+        playerInput === rock && computerPlay === "scissors" || 
+        playerInput === paper && computerPlay === "rock" ||
+        playerInput === scissors && computerPlay === "paper")) {
             playerScore++;
             return `Player wins! ${playerInput} beats ${computerPlay}`;
         }
-    else if ((computerPlay === "rock" && playerInput === "scissors" ||
-              computerPlay === "paper" && playerInput === "rock" ||
-              computerPlay === "scissors" && playerInput === "paper")) {
+    else if ((computerPlay === "rock" && playerInput === scissors ||
+              computerPlay === "paper" && playerInput === rock ||
+              computerPlay === "scissors" && playerInput === paper)) {
                 computerScore++;
                 return `Computer wins! ${computerPlay} beats ${playerInput}`;
               }            
@@ -52,15 +70,5 @@ function getWinner() {
         console.log("Computer wins the round!");
     }
 }
-//Problematic function
-function game() {
-    while(roundsPlayed <= 5) { //roundsplayed = 0, 0 < 5 --> TRUE 
-        console.log("Player score: " + playerScore + " : " + "computer score: " + computerScore);
-        console.log("Round number "+roundsPlayed + ": " +playRound(playerInput, computerPlay));
-        roundsPlayed++;
-    }
-    return getWinner();
-}
 
-game();
 
