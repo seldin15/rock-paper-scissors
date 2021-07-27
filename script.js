@@ -1,10 +1,14 @@
-const rock = document.querySelector('#rock');
-const paper = document.querySelector('#paper');
-const scissors = document.querySelector('#scissors');
+const buttons = document.querySelectorAll('button');
+const choice_rock = document.querySelector('#rock');
+const choice_paper = document.querySelector('#paper');
+const choice_scissors = document.querySelector('#scissors');
 
 let roundsPlayed = 1;
+let playerChoice;
 let playerScore = 0;
 let computerScore = 0;
+let status = document.querySelector('.status');
+
 
 //Function that returns random computer pick for RPS
 function computerPlay() {
@@ -15,50 +19,50 @@ function computerPlay() {
     return result;
 }
 //Buttons!
-rock.addEventListener('click', playRound);
-paper.addEventListener('click', playRound);
-scissors.addEventListener('click', playRound);
+buttons.forEach((button) => {
+    button.addEventListener('click', () => {
+        playRound(playerChoice); //Unsure what argument to put here --> this might be a problem?
+    });
+});
 
-function playerInput(rock, paper, scissors) {
-    if(rock) {
-        console.log("rock");
+function playerInput() {
+    if(choice_rock) {
+        playerChoice = "rock"; 
     }
-    if(paper) {
-        console.log("paper");
+    if(choice_paper) {
+        playerChoice = "paper";
     }
-    if(scissors) {
-        console.log("scissors");
+    if(choice_scissors) {
+        playerChoice = "scissors";
     }
 }
 
-
-
-
-
-function playRound(playerInput, computerPlay) {
+function playRound(playerInput) {
     //Player or computer wins if any of the combination is true: player: rock ; computer: paper --> computer wins (paper beats rock etc.)!
-    playerInput = playerInput(rock, paper, scissors);
-    computerPlay = computerPlay();
-     if(playerInput === computerPlay) {
+    if(playerInput === computerPlay()) {
         playerScore++;
         computerScore++;
-        return "Tie!";
+        status.textContent = "Tie!";
+        return status;
     }
     else if(
         (
-        playerInput === rock && computerPlay === "scissors" || 
-        playerInput === paper && computerPlay === "rock" ||
-        playerInput === scissors && computerPlay === "paper")) {
+        playerInput === "rock" && computerPlay() === "scissors" || 
+        playerInput === "paper" && computerPlay() === "rock" ||
+        playerInput === "scissors" && computerPlay() === "paper")) {
             playerScore++;
-            return `Player wins! ${playerInput} beats ${computerPlay}`;
+            status.setContent = `Player wins! ${playerInput} beats ${computerPlay}`;
+            return status;
         }
-    else if ((computerPlay === "rock" && playerInput === scissors ||
-              computerPlay === "paper" && playerInput === rock ||
-              computerPlay === "scissors" && playerInput === paper)) {
+    else if ((computerPlay() === "rock" && playerInput === "scissors" ||
+              computerPlay() === "paper" && playerInput === "rock" ||
+              computerPlay() === "scissors" && playerInput === "paper")) {
                 computerScore++;
-                return `Computer wins! ${computerPlay} beats ${playerInput}`;
+                status.setContent = `Computer wins! ${computerPlay} beats ${playerInput}`;
+                return status;
               }            
 }
+/* To be continued
 function getWinner() {
     if(playerScore === computerScore) {
         console.log("Tie!");
@@ -70,5 +74,6 @@ function getWinner() {
         console.log("Computer wins the round!");
     }
 }
+*/
 
 
