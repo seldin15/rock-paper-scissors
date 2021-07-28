@@ -1,10 +1,8 @@
-const buttons = document.querySelectorAll('button');
-const choice_rock = document.querySelector('#rock');
-const choice_paper = document.querySelector('#paper');
-const choice_scissors = document.querySelector('#scissors');
+const choice_rock = document.getElementById('rock');
+const choice_paper = document.getElementById('paper');
+const choice_scissors = document.getElementById('scissors');
 
 let roundsPlayed = 1;
-let playerChoice;
 let playerScore = 0;
 let computerScore = 0;
 let status = document.querySelector('.status');
@@ -19,50 +17,42 @@ function computerPlay() {
     return result;
 }
 //Buttons!
-buttons.forEach((button) => {
-    button.addEventListener('click', () => {
-        playRound(playerChoice); //Unsure what argument to put here --> this might be a problem?
-    });
-});
+choice_rock.addEventListener('click', () => playRound('rock'));
+choice_paper.addEventListener('click', () => playRound('paper'));
+choice_scissors.addEventListener('click', () => playRound('scissors'));
 
-function playerInput() {
-    if(choice_rock) {
-        playerChoice = "rock"; 
-    }
-    if(choice_paper) {
-        playerChoice = "paper";
-    }
-    if(choice_scissors) {
-        playerChoice = "scissors";
-    }
-}
-
+//Accepts a parameter, gets the parameter ON CLICK --> playRound('rock') i.e 
 function playRound(playerInput) {
+    let computerInput = computerPlay();
+    let playerChoice = playerInput;
     //Player or computer wins if any of the combination is true: player: rock ; computer: paper --> computer wins (paper beats rock etc.)!
-    if(playerInput === computerPlay()) {
+    if(playerChoice === computerInput) {
         playerScore++;
         computerScore++;
+        status.style.cssText = 'font-size:24px';
         status.textContent = "Tie!";
         return status;
     }
     else if(
         (
-        playerInput === "rock" && computerPlay() === "scissors" || 
-        playerInput === "paper" && computerPlay() === "rock" ||
-        playerInput === "scissors" && computerPlay() === "paper")) {
+        playerChoice === 'rock'  && computerInput === "scissors" || 
+        playerChoice === 'paper' && computerInput === "rock" ||
+        playerChoice === 'scissors' && computerInput === "paper")) {
             playerScore++;
-            status.setContent = `Player wins! ${playerInput} beats ${computerPlay}`;
+            status.style.cssText = 'font-size: 24px; color: yellow';
+            status.textContent = `Player wins! ${playerChoice} beats ${computerInput}`;
             return status;
         }
-    else if ((computerPlay() === "rock" && playerInput === "scissors" ||
-              computerPlay() === "paper" && playerInput === "rock" ||
-              computerPlay() === "scissors" && playerInput === "paper")) {
+    else if ((computerInput === "rock" && playerChoice === 'scissors' ||
+              computerInput === "paper" && playerChoice === 'rock' ||
+              computerInput === "scissors" && playerChoice === 'paper')) {
                 computerScore++;
-                status.setContent = `Computer wins! ${computerPlay} beats ${playerInput}`;
+                status.style.cssText = 'font-size:24px';
+                status.textContent = `Computer wins! ${computerInput} beats ${playerInput}`;
                 return status;
               }            
 }
-/* To be continued
+
 function getWinner() {
     if(playerScore === computerScore) {
         console.log("Tie!");
@@ -74,6 +64,5 @@ function getWinner() {
         console.log("Computer wins the round!");
     }
 }
-*/
 
 
