@@ -1,8 +1,8 @@
 const choice_rock = document.getElementById('rock');
 const choice_paper = document.getElementById('paper');
 const choice_scissors = document.getElementById('scissors');
+const playAgainButton = document.getElementById('reset');
 
-let roundsPlayed = 1;
 let playerScore = 0;
 let computerScore = 0;
 let status = document.querySelector('.status');
@@ -21,57 +21,66 @@ function computerPlay() {
 choice_rock.addEventListener('click', () => playRound('ROCK'));
 choice_paper.addEventListener('click', () => playRound('PAPER'));
 choice_scissors.addEventListener('click', () => playRound('SCISSORS'));
+playAgainButton.addEventListener('click', () => playAgain());
 
 //Accepts a parameter, gets the parameter ON CLICK --> playRound('rock') i.e 
 function playRound(playerInput) {
     let computerInput = computerPlay();
     let playerChoice = playerInput;
+    checkWinner();
     //Player or computer wins if any of the combination is true: player: rock ; computer: paper --> computer wins (paper beats rock etc.)!
-    if(playerChoice === computerInput) {
+        if(playerChoice === computerInput) {
         status.style.cssText = 'font-size:24px; color: #C38D9E';
         status.textContent = "Tie!";
         playerScoreText.textContent = `Player: ${playerScore}`;
         computerScoreText.textContent = `Computer: ${computerScore}`;
-        roundsPlayed++; 
+        checkWinner();
         return status;
-    }
-    else if(
-        (
-        playerChoice === 'ROCK'  && computerInput === "SCISSORS" || 
-        playerChoice === 'PAPER' && computerInput === "ROCK" ||
-        playerChoice === 'SCISSORS' && computerInput === "PAPER")) {
+        }
+        else if(
+            (
+            playerChoice === 'ROCK'  && computerInput === "SCISSORS" || 
+            playerChoice === 'PAPER' && computerInput === "ROCK" ||
+            playerChoice === 'SCISSORS' && computerInput === "PAPER")) {
             playerScore++;
-            roundsPlayed++;
             status.style.cssText = 'font-size: 24px; color: #41B3A3';
             status.textContent = `Player wins! ${playerChoice} beats ${computerInput}!`;
             playerScoreText.textContent = `Player: ${playerScore}`;
             computerScoreText.textContent = `Computer: ${computerScore}`; 
+            checkWinner();
             return status;
-        }
-    else if ((computerInput === "ROCK" && playerChoice === 'SCISSORS' ||
-              computerInput === "PAPER" && playerChoice === 'ROCK' ||
-              computerInput === "SCISSORS" && playerChoice === 'PAPER')) {
+            }
+        else if ((computerInput === "ROCK" && playerChoice === 'SCISSORS' ||
+                computerInput === "PAPER" && playerChoice === 'ROCK' ||
+                computerInput === "SCISSORS" && playerChoice === 'PAPER')) {
                 computerScore++;
-                roundsPlayed++;
                 status.style.cssText = 'font-size:24px; color: #E27D60';
                 status.textContent = `Computer wins! ${computerInput} beats ${playerInput}!`;
                 playerScoreText.textContent = `Player: ${playerScore}`;
-                computerScoreText.textContent = `Computer: ${computerScore}`; 
+                computerScoreText.textContent = `Computer: ${computerScore}`;
+                checkWinner(); 
                 return status;
-              } 
+                } 
 }
-/*
-function roundsCounter() {
-    if(roundsPlayed === 5) {
-        if(playerScore > computerScore) {
-            status.textContent = "You win! Play again?";
+function checkWinner() {
+        if(playerScore >= 5) {
+            choice_rock.disabled = true;
+            choice_paper.disabled = true;
+            choice_scissors.disabled = true;
+            status.textContent = "You win the game! Play again?";
         }
-        else {
-            status.textContent = "Computer wins! Play again?";
+        else if(computerScore >= 5) {
+            choice_rock.disabled = true;
+            choice_paper.disabled = true;
+            choice_scissors.disabled = true;
+            status.textContent = "You lose! Want to try again?";
         }
-    }
 }
-*/
+
+function playAgain() {
+    location.reload();
+}
+
 
 
 
