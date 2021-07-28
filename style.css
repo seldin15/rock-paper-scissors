@@ -56,3 +56,27 @@ button:hover {
     border: 1px solid white;
     color: white;
 }
+.scoreboard {
+    width: 80%;
+    border: 1px solid white;
+    margin-top: 60px;
+    color: white;
+    display: flex;
+    flex-direction: column;
+}
+.scoreboard-title {
+    display: flex;
+    margin: 20px;
+    justify-content: center;
+}
+.score {
+    display: flex;
+    margin: 10px;
+    justify-content: space-evenly;
+}
+#computer {
+    color: #E27D60;
+}
+#player {
+    color: #41B3A3;
+}
