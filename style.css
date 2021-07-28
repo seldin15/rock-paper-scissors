@@ -80,3 +80,6 @@ button:hover {
 #player {
     color: #41B3A3;
 }
+.resetButton {
+    margin-top: 40px;
+}
