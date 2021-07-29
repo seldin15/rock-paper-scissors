@@ -1,6 +1,6 @@
-const choice_rock = document.getElementById('rock');
-const choice_paper = document.getElementById('paper');
-const choice_scissors = document.getElementById('scissors');
+const choiceRock = document.getElementById('rock');
+const choicePaper = document.getElementById('paper');
+const choiceScissors = document.getElementById('scissors');
 const playAgainButton = document.getElementById('reset');
 
 let playerScore = 0;
@@ -18,9 +18,9 @@ function computerPlay() {
     return result.toUpperCase();
 }
 //Buttons!
-choice_rock.addEventListener('click', () => playRound('ROCK'));
-choice_paper.addEventListener('click', () => playRound('PAPER'));
-choice_scissors.addEventListener('click', () => playRound('SCISSORS'));
+choiceRock.addEventListener('click', () => playRound('ROCK'));
+choicePaper.addEventListener('click', () => playRound('PAPER'));
+choiceScissors.addEventListener('click', () => playRound('SCISSORS'));
 playAgainButton.addEventListener('click', () => playAgain());
 
 //Accepts a parameter, gets the parameter ON CLICK --> playRound('rock') i.e 
@@ -64,15 +64,15 @@ function playRound(playerInput) {
 }
 function checkWinner() {
         if(playerScore >= 5) {
-            choice_rock.disabled = true;
-            choice_paper.disabled = true;
-            choice_scissors.disabled = true;
+            choiceRock.disabled = true;
+            choicePaper.disabled = true;
+            choiceScissors.disabled = true;
             status.textContent = "You win the game! Play again?";
         }
         else if(computerScore >= 5) {
-            choice_rock.disabled = true;
-            choice_paper.disabled = true;
-            choice_scissors.disabled = true;
+            choiceRock.disabled = true;
+            choicePaper.disabled = true;
+            choiceScissors.disabled = true;
             status.textContent = "You lose! Want to try again?";
         }
 }
